@@ -106,11 +106,21 @@ export default function Step7() {
             onScroll={handleScroll}
             className="flex overflow-x-auto snap-x hide-scrollbar gap-4 pb-4"
           >
-            {images.map((img) => (
-              <div key={img.id} className="snap-center shrink-0 w-[85%] aspect-[4/5] overflow-hidden relative shadow-lg rounded-2xl">
-                <img className="w-full h-full object-cover" alt={img.alt_text} src={img.image_url}/>
+            {images.length > 0 ? (
+              images.map((img) => (
+                <div key={img.id} className="snap-center shrink-0 w-[85%] aspect-[4/5] overflow-hidden relative shadow-lg rounded-2xl">
+                  <img className="w-full h-full object-cover" alt={img.alt_text} src={img.image_url}/>
+                </div>
+              ))
+            ) : property.image_url ? (
+              <div className="snap-center shrink-0 w-full aspect-[4/5] overflow-hidden relative shadow-lg rounded-2xl">
+                <img className="w-full h-full object-cover" alt={property.name} src={property.image_url}/>
               </div>
-            ))}
+            ) : (
+              <div className="snap-center shrink-0 w-full aspect-[4/5] bg-surface-container-high rounded-2xl flex items-center justify-center">
+                <span className="material-symbols-outlined text-4xl text-on-surface-variant/30">image</span>
+              </div>
+            )}
           </div>
           {images.length > 1 && (
             <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-1.5 px-3 py-1.5 bg-surface-container-lowest/60 backdrop-blur-md rounded-full">
