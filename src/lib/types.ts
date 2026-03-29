@@ -21,7 +21,6 @@ export interface Property {
   property_highlights?: PropertyHighlight[]
   nearby_facilities?: NearbyFacility[]
 }
-
 export interface PropertyImage {
   id: string
   property_id: string
@@ -29,14 +28,12 @@ export interface PropertyImage {
   alt_text: string
   sort_order: number
 }
-
 export interface PropertyHighlight {
   id: string
   property_id: string
   text: string
   sort_order: number
 }
-
 export interface NearbyFacility {
   id: string
   property_id: string
