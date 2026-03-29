@@ -14,6 +14,7 @@ export interface Property {
   type: 'beli' | 'sewa'
   latitude: number | null
   longitude: number | null
+  image_url?: string // Gambar utama
   created_at: string
   // Relasi
   property_images?: PropertyImage[]
