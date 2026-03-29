@@ -3,11 +3,9 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
 import { supabase } from '../lib/supabaseClient'
 import type { Property, PropertyHighlight } from '../lib/types'
-
 interface PropertyWithHighlights extends Property {
   property_highlights: PropertyHighlight[]
 }
-
 export default function Step6() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -16,18 +14,15 @@ export default function Step6() {
   const [properties, setProperties] = useState<PropertyWithHighlights[]>([])
   const [loading, setLoading] = useState(true)
   const [nearestPrice, setNearestPrice] = useState<number | null>(null)
-
   useEffect(() => {
     const fetchProperties = async () => {
       let query = supabase
         .from('properties')
         .select('*, property_highlights(*)')
-
       // Filter by area if specified
       if (area) {
         query = query.eq('location_city', area)
       }
-
       // Filter by budget if specified
       if (price) {
         const p = parseInt(price)
@@ -35,10 +30,8 @@ export default function Step6() {
           query = query.lte('price', p)
         }
       }
-
       const { data } = await query.order('created_at', { ascending: true })
       if (data) setProperties(data)
-
       // If no results and price was specified, find the cheapest available property
       if ((!data || data.length === 0) && price) {
         let nearestQuery = supabase
@@ -64,12 +57,10 @@ export default function Step6() {
       } else {
         setNearestPrice(null)
       }
-
       setLoading(false)
     }
     fetchProperties()
   }, [area, price])
-
   // Helper: format budget for display
   const formatBudget = (val: number): string => {
     if (val >= 1000) {
@@ -78,31 +69,26 @@ export default function Step6() {
     }
     return `Rp ${val} Juta`
   }
-
   const formatPrice = (p: number) => {
     if (p >= 1000) {
       return `Rp ${(p / 1000).toString().replace('.', ',')}M`
     }
     return `Rp ${p} JT`
   }
-
   // Action: increase budget to nearest available property price
   const handleIncreaseBudget = () => {
     if (nearestPrice) {
       navigate(`/step6?area=${encodeURIComponent(area)}&price=${nearestPrice}`, { replace: true })
     }
   }
-
   // Action: remove area filter
   const handleSearchAllAreas = () => {
     navigate(`/step6?${price ? `price=${price}` : ''}`, { replace: true })
   }
-
   // Action: go back to chat
   const handleBackToChat = () => {
     navigate('/chat')
   }
-
   return (
     <div className="bg-surface font-body text-on-surface">
       <div className="max-w-[480px] mx-auto min-h-screen flex flex-col relative bg-surface shadow-xl">
@@ -115,7 +101,6 @@ export default function Step6() {
             <span className="font-headline font-bold text-lg tracking-tight text-on-surface">GriyaPintar</span>
           </div>
         </header>
-
         {/* Main Content Canvas */}
         <main className="flex-1 px-4 pt-2 pb-32">
           {loading ? (
@@ -142,14 +127,12 @@ export default function Step6() {
                   search_off
                 </span>
               </div>
-
               <h1 className="font-headline font-extrabold text-2xl leading-tight tracking-tight mb-3 text-on-surface">
                 Belum Ada yang Cocok
               </h1>
               <p className="text-on-surface-variant font-body text-[15px] leading-relaxed max-w-[320px] mb-2">
                 Hmm, belum ada properti yang sesuai dengan kriteriamu saat ini.
               </p>
-
               {/* Current Criteria Summary */}
               <div className="bg-surface-container-lowest border border-outline-variant/15 rounded-2xl p-5 w-full mt-4 mb-6">
                 <p className="text-on-surface-variant text-sm font-medium mb-3">Kriteria pencarianmu:</p>
@@ -166,14 +149,15 @@ export default function Step6() {
                       ≤ {formatBudget(parseInt(price))}
                     </span>
                   )}
+                  {!area && !price && (
+                    <span className="text-on-surface-variant text-sm">Semua area, tanpa batas budget</span>
+                  )}
                 </div>
               </div>
-
               {/* Suggestion Text */}
               <p className="text-on-surface-variant text-sm mb-5 font-medium">
                 Coba salah satu opsi berikut: 👇
               </p>
-
               {/* Action Buttons */}
               <div className="w-full space-y-3">
                 {nearestPrice && (
@@ -219,7 +203,6 @@ export default function Step6() {
                   </p>
                 </div>
               </section>
-
               {/* Property Results */}
               <div className="space-y-8">
               {properties.map((property) => (
@@ -279,7 +262,7 @@ export default function Step6() {
             </>
           )}
         </main>
-
+        {/* BottomNavBar */}
         <BottomNav activeTab="explore" />
       </div>
     </div>
