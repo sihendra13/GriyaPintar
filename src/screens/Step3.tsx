@@ -1,21 +1,17 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
 const locations = [
   { id: 'Yogyakarta', label: 'Kota Yogyakarta', subtitle: 'Pusat Budaya', icon: 'location_city' },
   { id: 'Sleman', label: 'Sleman', subtitle: 'Utara', icon: 'terrain' },
   { id: 'Bantul', label: 'Bantul', subtitle: 'Selatan', icon: 'waves' },
   { id: '', label: 'Semua Area', subtitle: 'Eksplorasi', icon: 'map' },
 ]
-
 export default function Step3() {
   const [selected, setSelected] = useState('Yogyakarta')
   const navigate = useNavigate()
-
   const handleContinue = () => {
     navigate(`/step4?area=${encodeURIComponent(selected)}`)
   }
-
   return (
     <div className="bg-surface text-on-surface font-body min-h-screen flex flex-col items-center">
       {/* TopAppBar: Mobile Optimized */}
@@ -28,7 +24,6 @@ export default function Step3() {
         </div>
         <span className="text-[#595c5e] dark:text-[#c4c6cf] font-medium text-xs">Step 2/3</span>
       </header>
-
       {/* Main Content Canvas */}
       <main className="w-full max-w-[480px] px-5 pt-6 pb-36 flex-grow flex flex-col gap-8">
         {/* Instructional Header */}
@@ -38,7 +33,6 @@ export default function Step3() {
             Lokasi menentukan segalanya, harga, akses dan gaya hidup kamu.
           </p>
         </section>
-
         {/* Visual Map Context (Mobile Friendly) */}
         <section className="relative w-full h-40 bg-surface-container rounded-2xl overflow-hidden shadow-sm">
           <img alt="Yogyakarta Landscape" className="w-full h-full object-cover grayscale opacity-40 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClflFBWd9sDQS3UwQGYp1PM-dlpL6yCyzx4SwzLgVsT-TOPKalk9g6GsSEr_0bqbn9lOGFbzRUKNCbOAv-Ic1qBBimQQQE5ttiJPWo-BJzyWk3Si9mMetvak-FkgDWzlz5TeiALTUSsa-PAdqi0fz8i4xnQFUvf7LU4a0Xxv9EyYB2J2-Tksiyw3tSSIl7gfwlgHwpkUFM6yeACj8RVR7jOH1J_lUHddgDJHEanyUnsAl7PKp0EV_GCGZbAC_UwjEsJCP-UOUG62rQ" />
@@ -48,7 +42,6 @@ export default function Step3() {
             <span className="text-[10px] font-bold tracking-widest uppercase text-on-surface-variant">D.I. Yogyakarta</span>
           </div>
         </section>
-
         {/* Selection Grid */}
         <div className="grid grid-cols-2 gap-3">
           {locations.map((loc) => {
@@ -81,7 +74,6 @@ export default function Step3() {
             )
           })}
         </div>
-
         {/* Progress Indicator */}
         <div className="flex gap-2 justify-center pt-2">
           <div className="h-1.5 w-6 rounded-full bg-primary-container/30"></div>
@@ -89,14 +81,13 @@ export default function Step3() {
           <div className="h-1.5 w-6 rounded-full bg-surface-container-highest"></div>
         </div>
       </main>
-
       {/* Navigation Action Area */}
       <footer className="fixed bottom-0 w-full max-w-[480px] px-5 py-6 glass-effect border-t border-outline-variant/10 z-50 shadow-2xl rounded-t-2xl">
         <button
           onClick={handleContinue}
           className="w-full h-14 magic-gradient text-on-primary rounded-2xl font-headline font-bold text-base shadow-xl shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
         >
-          Lanjutkan Kurasi
+          Lanjutkan Pencarian
           <span className="material-symbols-outlined text-xl">arrow_forward</span>
         </button>
       </footer>
