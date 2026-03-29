@@ -5,7 +5,6 @@ import type { Property, PropertyImage, NearbyFacility } from '../lib/types'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-
 // Custom pin icon yang sesuai desain UI — lingkaran ungu dengan ikon lokasi
 const mapPin = L.divIcon({
   className: '',
@@ -19,22 +18,18 @@ const mapPin = L.divIcon({
   iconAnchor: [24, 44],
   popupAnchor: [0, -40],
 })
-
 export default function Step7() {
   const { id } = useParams<{ id: string }>()
   const [activeIndex, setActiveIndex] = useState(0)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
-
   const [property, setProperty] = useState<Property | null>(null)
   const [images, setImages] = useState<PropertyImage[]>([])
   const [facilities, setFacilities] = useState<NearbyFacility[]>([])
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     const fetchProperty = async () => {
       if (!id) return
-
       // Ambil data properti
       const { data: propData } = await supabase
         .from('properties')
@@ -42,7 +37,6 @@ export default function Step7() {
         .eq('id', id)
         .single()
       if (propData) setProperty(propData)
-
       // Ambil gambar properti
       const { data: imgData } = await supabase
         .from('property_images')
@@ -50,19 +44,16 @@ export default function Step7() {
         .eq('property_id', id)
         .order('sort_order', { ascending: true })
       if (imgData) setImages(imgData)
-
       // Ambil fasilitas terdekat
       const { data: facData } = await supabase
         .from('nearby_facilities')
         .select('*')
         .eq('property_id', id)
       if (facData) setFacilities(facData)
-
       setLoading(false)
     }
     fetchProperty()
   }, [id])
-
   const handleScroll = () => {
     if (!scrollContainerRef.current) return
     const scrollPosition = scrollContainerRef.current.scrollLeft
@@ -70,14 +61,12 @@ export default function Step7() {
     const newIndex = Math.round(scrollPosition / width)
     setActiveIndex(newIndex)
   }
-
   const formatPrice = (price: number) => {
     if (price >= 1000) {
       return `Rp ${(price / 1000).toString().replace('.', ',')}M`
     }
     return `Rp ${price} JT`
   }
-
   if (loading) {
     return (
       <div className="max-w-[480px] mx-auto min-h-screen flex items-center justify-center bg-surface">
@@ -88,7 +77,6 @@ export default function Step7() {
       </div>
     )
   }
-
   if (!property) {
     return (
       <div className="max-w-[480px] mx-auto min-h-screen flex items-center justify-center bg-surface">
@@ -96,7 +84,6 @@ export default function Step7() {
       </div>
     )
   }
-
   return (
     <div className="max-w-[480px] mx-auto min-h-screen flex flex-col relative bg-surface">
       {/* TopAppBar */}
@@ -138,7 +125,6 @@ export default function Step7() {
             </div>
           )}
         </section>
-
         {/* Main Info Section — Dynamic */}
         <section className="px-6 mt-6">
           <div className="flex flex-col gap-2">
@@ -156,7 +142,6 @@ export default function Step7() {
             </div>
           </div>
         </section>
-
         {/* AI Recommendation Badge — Dynamic */}
         {property.ai_insight && (
           <section className="px-6 mt-8">
@@ -173,7 +158,6 @@ export default function Step7() {
             </div>
           </section>
         )}
-
         {/* Specs Grid — Dynamic */}
         <section className="px-6 mt-8 grid grid-cols-3 gap-3">
           <div className="bg-surface-container-low p-4 rounded-2xl flex flex-col items-center justify-center gap-2">
@@ -189,7 +173,6 @@ export default function Step7() {
             <span className="text-[11px] font-bold text-on-surface-variant text-center leading-tight">{property.land_area}m² Luas Tanah</span>
           </div>
         </section>
-
         {/* Description — Dynamic */}
         {property.description && (
           <section className="px-6 mt-10">
@@ -197,7 +180,6 @@ export default function Step7() {
             <p className="text-on-surface-variant leading-[1.6] text-[14px]">{property.description}</p>
           </section>
         )}
-
         {/* Facilities Nearby — Dynamic from Supabase */}
         {facilities.length > 0 && (
           <section className="px-6 mt-10">
@@ -220,7 +202,6 @@ export default function Step7() {
             </div>
           </section>
         )}
-
         {/* Interactive Map — Powered by Leaflet + OpenStreetMap */}
         {property.latitude && property.longitude && (
           <section className="px-6 mt-10">
@@ -247,9 +228,8 @@ export default function Step7() {
           </section>
         )}
       </main>
-
       {/* Fixed Bottom CTA */}
-      <footer className="fixed bottom-0 w-full max-w-[480px] left-1/2 -translate-x-1/2 bg-white/95 dark:bg-[#1a1c1e]/95 backdrop-blur-xl z-[60] px-6 py-5 pb-8 border-t border-outline-variant/10">
+      <footer className="fixed bottom-0 w-full max-w-[480px] left-1/2 -translate-x-1/2 bg-white backdrop-blur-xl z-[60] px-6 py-5 pb-8 border-t border-outline-variant/10">
         <div className="flex gap-4 items-center">
           <button className="w-14 h-14 shrink-0 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface active:scale-90 transition-transform">
             <span className="material-symbols-outlined">favorite</span>
