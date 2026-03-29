@@ -50,7 +50,7 @@ export default function Step1() {
           {featured && (
             <Link to={`/step7/${featured.id}`} className="block bg-white rounded-[24px] overflow-hidden shadow-sm border border-outline/5 relative">
               <div className="relative aspect-[4/3] m-3 overflow-hidden rounded-[16px]">
-                <img alt={featured.name} className="w-full h-full object-cover" src={featured.image_url || 'https://images.unsplash.com/photo-1600585154340-be6199f7e009?auto=format&fit=crop&q=80&w=800'}/>
+                <img alt={featured.name} className="w-full h-full object-cover" src={featured.image_url || 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1000'}/>
                 <div className="absolute top-3 left-3 floating-ai-element px-3 py-1.5 rounded-full text-[9px] font-bold text-primary flex items-center gap-1.5 border border-primary/10 shadow-sm">
                   <span className="material-symbols-outlined text-[12px]" style={{ fontVariationSettings: '"FILL" 1' }}>auto_awesome</span>
                   AI RECOMMENDED
