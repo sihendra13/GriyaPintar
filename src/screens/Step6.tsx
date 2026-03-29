@@ -70,13 +70,6 @@ export default function Step6() {
     fetchProperties()
   }, [area, price])
 
-  // Gambar utama untuk setiap properti (fallback jika belum ada gambar di DB)
-  const cardImages: Record<string, string> = {
-    'a1b2c3d4-e5f6-7890-abcd-ef1234567890': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCoJkg87fB-CvFYxA33Lr5aFsUEfkysOSbauc68FbGTK2-MihoXIWKi2YFcFjZjt580BipeyAJoWh_SbbgvQLCBA8ZFzY4QXyS9hJm5qPEasZlKt5tleRG_ZbKdAR-uWGl9b6sLM52OnSuGHw88oxf6NuMjTVXwsy9ot0J3p2kZHd2hHX7YehzvhFDwBOthtIQG-Z6QfvTByuQTDf51MFe7-jvlcv1w7dHjajbaL0mtuMwC38zNcpqd4NmU0e8pfM04rRh9HfPmL1iX',
-    'b2c3d4e5-f6a7-8901-bcde-f12345678901': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBilT7uCweKxVIwYQDbsKM_RI2EZPmgdwfQN4NgHblDwAc9p54toVoc6-LMmLgSM5QVqnKN3THD8Yt3SDwdVt6u0NrKyLMWYF5eTOMWCRqk2sthZN05Hlfn2SBya6_tsrY9KvuGV7WrHeVupfNJi1oP3un7LaPmlxwwLuXIHU1XKq-lM1OIcN3ZF-ZVVncUuFWce_Oz01h8zDbWqTGpucDd_wX4zM9DcVnS0InovnzRxF5urQGLt_J0tqBOIFXrQ24FgzdxCJrGXnP0',
-    'c3d4e5f6-a7b8-9012-cdef-123456789012': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBPMH11SQzG9OigCc4uDOp4-nNrDOgOUtDRw3pzy40dgxvtcJZCnBCg5woVOuzy-2HfgpgW2VCFM8XOf2Ll4D1T21rjqtjdLKrmMZKW-B5zNkDqSCOZtAwAmk5243YEei-foFxbuH8GrCMSvVvIsW5VUFXEnQjwdEizZKy7IhjTSDjCjkMf8iFgUqeB77X5NkiF1lFWpmprtKS_bRFpQMwjHODOWHo1WJNq9CO7Iwf9HTCTgtFqWBEPbzs3K1vEj5SbyfSqQ2s4IkJu',
-  }
-
   // Helper: format budget for display
   const formatBudget = (val: number): string => {
     if (val >= 1000) {
@@ -173,9 +166,6 @@ export default function Step6() {
                       ≤ {formatBudget(parseInt(price))}
                     </span>
                   )}
-                  {!area && !price && (
-                    <span className="text-on-surface-variant text-sm">Semua area, tanpa batas budget</span>
-                  )}
                 </div>
               </div>
 
@@ -235,7 +225,7 @@ export default function Step6() {
               {properties.map((property) => (
                 <article key={property.id} className="bg-surface-container-lowest overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] active:scale-[0.99] transition-transform duration-200 rounded-2xl">
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <img className="w-full h-full object-cover" alt={property.name} src={cardImages[property.id] || 'https://placehold.co/600x400'} />
+                    <img className="w-full h-full object-cover" alt={property.name} src={property.image_url || 'https://images.unsplash.com/photo-1600585154340-be6199f7e009?auto=format&fit=crop&q=80&w=800'} />
                     <div className="absolute top-4 right-4">
                       <button className="rounded-full shadow-sm w-10 h-10 flex items-center justify-center hover:brightness-110 transition-all bg-surface-container-high text-on-surface">
                         <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: '"FILL" 0, "wght" 400' }}>favorite</span>
@@ -290,7 +280,6 @@ export default function Step6() {
           )}
         </main>
 
-        {/* BottomNavBar */}
         <BottomNav activeTab="explore" />
       </div>
     </div>
