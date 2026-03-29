@@ -53,47 +53,4 @@ export default function Step1() {
 
           {/* Featured Property Card — Dynamically loaded from Supabase */}
           {featured && (
-            <Link to={`/step7/${featured.id}`} className="block bg-white rounded-[24px] overflow-hidden shadow-sm border border-outline/5 relative">
-              <div className="relative aspect-[4/3] m-3 overflow-hidden rounded-[16px]">
-                <img alt={featured.name} className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujpzePi247lUjne0Wbf14gEy1_5kVUcYGadfJiJguSmJhWtWLNPKIZgvWcbLOFgspVZarUYYzNJXN2RI4XOGwvd5ur91gMBr2bPJQobl9l29UM8YwKWGT9Rnl4gHIFhEaIaGlPWONmilBR_5vLxzAFjgGV_TYeIpyKs_rgFvSZ29aIUmOqbU9Y8zakEG9ii3OYu4sAlRgKL4sjjhjI_woRgt3k2DqOQ6xwfgqtfpfxRj4o2zPKxoTDWl5sz4m5QBKKy7j2U1Jwhew"/>
-                <div className="absolute top-3 left-3 floating-ai-element px-3 py-1.5 rounded-full text-[9px] font-bold text-primary flex items-center gap-1.5 border border-primary/10 shadow-sm">
-                  <span className="material-symbols-outlined text-[12px]" style={{ fontVariationSettings: '"FILL" 1' }}>auto_awesome</span>
-                  AI RECOMMENDED
-                </div>
-              </div>
-              <div className="px-5 pb-5 pt-1">
-                <div className="flex justify-between items-baseline mb-3">
-                  <h3 className="font-headline text-lg font-bold text-on-surface">{featured.name}</h3>
-                  <span className="font-headline font-bold text-primary text-lg">
-                    Rp {featured.price >= 1000 ? `${(featured.price / 1000).toString().replace('.', ',')}M` : `${featured.price} JT`}
-                  </span>
-                </div>
-                <div className="flex items-center gap-4 text-on-surface-variant text-[13px] font-medium">
-                  <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">bed</span> {featured.bedrooms} KT</span>
-                  <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">bathtub</span> {featured.bathrooms} KM</span>
-                  <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-lg">square_foot</span> {featured.land_area}m²</span>
-                </div>
-              </div>
-            </Link>
-          )}
-
-          {/* AI Chat Assistant Card */}
-          <div className="bg-[#f2f2ff] p-5 rounded-[24px] flex items-start gap-4 border border-primary/5">
-            <div className="w-12 h-12 bg-[#e0e0ff] rounded-full flex-shrink-0 flex items-center justify-center text-primary">
-              <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: '"FILL" 1' }}>chat_bubble</span>
-            </div>
-            <div className="flex-1 space-y-2">
-              <p className="font-body text-[14px] leading-snug font-medium text-on-surface">"Hai! Ingin hunian dekat UGM atau daerah Malioboro?"</p>
-              <button className="text-primary font-label font-bold text-[13px] flex items-center gap-1">
-                Tanya GriyaPintar Sekarang
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
-      
-      {/* Bottom Navigation */}
-      <BottomNav activeTab="explore" />
-    </div>
-  )
-}
+            <Link to={`/step7/${featured.id}`} className="block bg-white
