@@ -208,7 +208,7 @@ export default function Step6() {
               {properties.map((property) => (
                 <article key={property.id} className="bg-surface-container-lowest overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] active:scale-[0.99] transition-transform duration-200 rounded-2xl">
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <img className="w-full h-full object-cover" alt={property.name} src={property.image_url || 'https://images.unsplash.com/photo-1600585154340-be6199f7e009?auto=format&fit=crop&q=80&w=800'} />
+                    <img className="w-full h-full object-cover" alt={property.name} src={property.image_url || 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1000'} />
                     <div className="absolute top-4 right-4">
                       <button className="rounded-full shadow-sm w-10 h-10 flex items-center justify-center hover:brightness-110 transition-all bg-surface-container-high text-on-surface">
                         <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: '"FILL" 0, "wght" 400' }}>favorite</span>
